@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Stop Spreadsheets</title>
+<meta name="description" content="You want to stop spreadsheets from wreaking havoc on your business, but where do you look?">
+<meta property="og:title" content="Stop Spreadsheets">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.stopspreadsheets.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ============================================================
+     CONFIG: paste your webhook URL here
+     ============================================================ */
+  :root {
+    --primary: #3278ff;
+    --primary-5: rgba(50, 120, 255, 0.05);
+    --primary-10: rgba(50, 120, 255, 0.10);
+    --fg: #152237;
+    --muted: #434e5f;
+    --muted-2: #6b7586;
+    --card: #ffffff;
+    --border: #e6e8ec;
+    --input-bg: rgba(0, 0, 0, 0.05);
+    --red: #e7000b;
+    --bg: #ffffff;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "Inter", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  img, video { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+  h1, h2, h3 { margin: 0; font-weight: 600; color: var(--fg); }
+
+  .container { width: 100%; padding-left: 32px; padding-right: 32px; }
+  .content { max-width: 1280px; margin: 0 auto; }
+
+  /* ---------- fade-in like the original ---------- */
+  @keyframes rise { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+  .rise { animation: rise .3s ease-out backwards; }
+  .d1 { animation-delay: .1s; } .d2 { animation-delay: .2s; }
+  @media (prefers-reduced-motion: reduce) { .rise { animation: none; } }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    padding-top: 96px;
+    background: linear-gradient(to bottom, var(--primary-10), transparent 400px);
+  }
+  .hero-inner {
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    max-width: 1024px; margin: 0 auto 64px;
+  }
+  .hero-logo { width: 100%; max-width: 672px; margin-bottom: 24px; border-radius: 8px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 4px 12px 4px 4px; margin-bottom: 24px;
+    background: var(--card); border: 1px solid var(--border); border-radius: 999px;
+    max-width: 100%; transition: background-color .15s;
+  }
+  .badge:hover { background: #f4f5f7; }
+  .badge-prefix {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 2px 8px; background: var(--primary-5); border-radius: 999px; flex-shrink: 0;
+  }
+  .badge-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--red); }
+  .badge-prefix span { font-size: 14px; font-weight: 500; letter-spacing: .025em; color: var(--red); white-space: nowrap; }
+  .badge-text { font-size: 14px; color: var(--fg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+  .hero h1 {
+    font-size: 60px; line-height: 1.25; letter-spacing: -1.5px; margin-bottom: 24px;
+  }
+  .hero p { font-size: 20px; line-height: 1.625; max-width: 768px; margin: 0 0 32px; }
+
+  /* ---------- Two video columns ---------- */
+  .columns {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    max-width: 1280px; margin: 0 auto; padding: 0 32px 96px;
+  }
+  .vid-col { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .vid-col h2 { font-size: 60px; line-height: 1.1; margin-bottom: 24px; }
+  .btn-primary {
+    display: inline-flex; align-items: center; justify-content: center;
+    background: var(--primary); color: #fff; font-weight: 500;
+    font-size: 18px; padding: 12px 32px; border-radius: 8px; border: 0;
+    margin-bottom: 24px; cursor: pointer; transition: filter .15s;
+    font-family: inherit;
+  }
+  .btn-primary:hover { filter: brightness(.93); }
+  .video-wrap { width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; background: #000; }
+  .video-wrap video { width: 100%; height: 100%; object-fit: cover; }
+
+  /* ---------- Form ---------- */
+  .form-section { padding: 32px; }
+  .form-card {
+    max-width: 640px; margin: 0 auto; background: var(--card);
+    border: 1px solid var(--border); border-radius: 12px; padding: 32px;
+    box-shadow: 0 1px 3px rgba(16, 24, 40, .06);
+  }
+  .form-card h2 { font-size: 20px; line-height: 28px; margin-bottom: 8px; }
+  .form-card .sub { font-size: 14px; color: var(--muted); margin: 0 0 24px; }
+  .field { margin-bottom: 20px; }
+  .field label { display: block; font-size: 14px; font-weight: 500; color: var(--muted); margin-bottom: 8px; }
+  .field label .req { color: var(--muted); }
+  .input-wrap { position: relative; display: flex; align-items: center; background: var(--input-bg); border-radius: 8px; }
+  .input-wrap svg { width: 18px; height: 18px; margin-left: 12px; margin-right: 8px; color: var(--muted-2); flex-shrink: 0; }
+  .input-wrap input {
+    width: 100%; height: 40px; border: 0; background: transparent; outline: none;
+    padding: 10px 12px; font: inherit; font-size: 14px; color: var(--fg); border-radius: 8px;
+  }
+  .input-wrap.has-icon input { padding-left: 0; }
+  .input-wrap:focus-within { box-shadow: 0 0 0 2px var(--primary); }
+  .input-wrap input::placeholder { color: #8a93a3; }
+  .check { display: flex; align-items: center; gap: 12px; margin: 4px 0 24px; cursor: pointer; font-size: 14px; }
+  .check input {
+    appearance: none; -webkit-appearance: none; margin: 0;
+    width: 24px; height: 24px; border-radius: 6px; background: var(--input-bg);
+    display: grid; place-items: center; cursor: pointer; flex-shrink: 0;
+  }
+  .check input:checked { background: var(--primary); }
+  .check input:checked::after {
+    content: ""; width: 6px; height: 11px; border: solid #fff; border-width: 0 2px 2px 0;
+    transform: rotate(45deg) translate(-1px, -1px);
+  }
+  .check input:focus-visible { box-shadow: 0 0 0 2px var(--primary); }
+  .btn-submit {
+    width: 100%; height: 40px; border: 0; border-radius: 8px; background: var(--primary);
+    color: #fff; font: inherit; font-size: 14px; cursor: pointer; transition: filter .15s;
+  }
+  .btn-submit:hover { filter: brightness(.93); }
+  .btn-submit:disabled { opacity: .6; cursor: default; }
+  .form-msg { margin-top: 16px; font-size: 14px; display: none; padding: 12px 14px; border-radius: 8px; }
+  .form-msg.ok { display: block; background: #ecfdf3; color: #067647; }
+  .form-msg.err { display: block; background: #fef3f2; color: #b42318; }
+  .success-state { text-align: center; padding: 24px 0 8px; }
+  .success-state h2 { margin-bottom: 8px; }
+
+  /* ---------- CTA ---------- */
+  .cta { padding-top: 80px; padding-bottom: 80px; background: var(--primary-10); }
+  .cta-card {
+    background: var(--card); border-radius: 24px; padding: 56px;
+    display: flex; align-items: center; justify-content: space-between; gap: 32px;
+  }
+  .cta-card .text { flex: 1; display: flex; flex-direction: column; gap: 16px; }
+  .cta-card h2 { font-size: 36px; line-height: 40px; }
+  .cta-card p { margin: 0; font-size: 18px; line-height: 28px; color: var(--muted); max-width: 672px; }
+  .btn-outline {
+    display: inline-flex; align-items: center; justify-content: center;
+    height: 44px; padding: 0 20px; font-size: 16px; font-weight: 500;
+    border: 1px solid var(--border); border-radius: 8px; background: var(--card);
+    box-shadow: 0 1px 2px rgba(16, 24, 40, .05); transition: background-color .15s; max-width: 100%;
+  }
+  .btn-outline:hover { background: #f4f5f7; }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 1024px) {
+    .hero h1, .vid-col h2 { font-size: 48px; }
+  }
+  @media (max-width: 768px) {
+    .container { padding-left: 16px; padding-right: 16px; }
+    .hero { padding-top: 64px; }
+    .hero-inner { margin-bottom: 48px; }
+    .hero h1, .vid-col h2 { font-size: 36px; }
+    .hero p { font-size: 18px; }
+    .columns { grid-template-columns: 1fr; gap: 48px; padding: 0 16px 64px; }
+    .form-section { padding: 16px; }
+    .form-card { padding: 24px; }
+    .cta { padding-top: 64px; padding-bottom: 64px; }
+    .cta-card { flex-direction: column; text-align: center; padding: 40px 24px; }
+    .cta-card p { margin: 0 auto; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ================= HERO ================= -->
+  <section class="container hero">
+    <div class="content">
+      <div class="hero-inner rise">
+        <img class="hero-logo"
+             src="stopspreadsheetslogo.svg"
+             alt="Stop Spreadsheets">
+        <a class="badge" href="https://www.stradiapartners.com">
+          <span class="badge-prefix"><span class="badge-dot"></span><span>STOP SPREADSHEETS</span></span>
+          <span class="badge-text">with Stradia Partners →</span>
+        </a>
+        <h1 class="rise d1">Choose your own adventure</h1>
+        <p class="rise d2">You want to stop spreadsheets from wreaking havoc on your business, but where do you look?</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= COUNTRY / CITY ================= -->
+  <section class="columns">
+    <div class="vid-col rise">
+      <h2>Country</h2>
+      <a class="btn-primary rise d1" href="https://www.youtube.com/watch?v=XhHu2PJrVPE" target="_blank" rel="noopener noreferrer">Watch Now</a>
+      <div class="video-wrap">
+        <video src="PreviewCountry.mp4" autoplay muted loop playsinline controls preload="metadata"></video>
+      </div>
+    </div>
+    <div class="vid-col rise">
+      <h2>City</h2>
+      <a class="btn-primary rise d1" href="https://www.youtube.com/watch?v=QE0Kw9EgQdk" target="_blank" rel="noopener noreferrer">Watch Now</a>
+      <div class="video-wrap">
+        <video src="PreviewCity.mp4" autoplay muted loop playsinline controls preload="metadata"></video>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FORM ================= -->
+  <section class="form-section">
+    <div class="form-card" id="form-card">
+      <h2>Get the Cheat Sheet and White Paper today!</h2>
+      <p class="sub">Whether you're a company or a builder, let's talk.</p>
+      <form id="intake-form" novalidate>
+        <div class="field">
+          <label for="name">Name<span class="req">*</span></label>
+          <div class="input-wrap">
+            <input id="name" name="name" type="text" placeholder="Your name" autocomplete="name" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="email">Email<span class="req">*</span></label>
+          <div class="input-wrap has-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>
+            </svg>
+            <input id="email" name="email" type="email" placeholder="name@example.com" autocomplete="email" required>
+          </div>
+        </div>
+        <label class="check">
+          <input id="builder" name="builder" type="checkbox">
+          <span>Are you an Airtable Builder?</span>
+        </label>
+        <button class="btn-submit" type="submit">Let's go!</button>
+        <div class="form-msg" id="form-msg" role="status"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ================= CTA ================= -->
+  <section class="container cta">
+    <div class="content cta-card">
+      <div class="text">
+        <h2>Get in touch</h2>
+        <p>Don't want to fill out the form? That's fine. Send us an email instead! We'd love to hear from you.</p>
+      </div>
+      <a class="btn-outline" href="mailto:we@stopspreadsheets.com">we@stopspreadsheets.com</a>
+    </div>
+  </section>
+
+<script>
+  /* ============================================================
+     Webhook URL. The form POSTs form-encoded fields:
+     Name, Email, Builder? ("true"/"false"), submittedAt (ISO), source
+     ============================================================ */
+  const WEBHOOK_URL = "https://hooks.airtable.com/workflows/v1/genericWebhook/appamO0jBMx54LYKF/wflsmUYDSNMqroAJw/wtrONFAsyZtRnlxV4";
+
+  const form = document.getElementById("intake-form");
+  const msg = document.getElementById("form-msg");
+  const btn = form.querySelector(".btn-submit");
+
+  function show(type, text) {
+    msg.className = "form-msg " + type;
+    msg.textContent = text;
+  }
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const name = form.name.value.trim();
+    const email = form.email.value.trim();
+    if (!name) { show("err", "Please enter your name."); form.name.focus(); return; }
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      show("err", "Please enter a valid email address."); form.email.focus(); return;
+    }
+    if (WEBHOOK_URL.includes("YOUR-WEBHOOK-URL")) {
+      show("err", "This form isn't connected yet — add the webhook URL in the page's script.");
+      return;
+    }
+
+    btn.disabled = true; btn.textContent = "Sending…";
+    try {
+      // Airtable webhooks don't send CORS headers, so a browser can't send JSON
+      // (it triggers a blocked preflight) or read the reply. Airtable also accepts
+      // application/x-www-form-urlencoded, which browsers send without a preflight.
+      // URLSearchParams sets that Content-Type automatically.
+      await fetch(WEBHOOK_URL, {
+        method: "POST",
+        mode: "no-cors",
+        body: new URLSearchParams({
+          "Name": name,
+          "Email": email,
+          "Builder?": form.builder.checked ? "true" : "false",
+          submittedAt: new Date().toISOString(),
+          source: location.hostname || "stopspreadsheets.com"
+        })
+      });
+      document.getElementById("form-card").innerHTML =
+        '<div class="success-state"><h2>Thanks, you\'re in!</h2>' +
+        '<p class="sub" style="margin:0">We\'ll be in touch with your Cheat Sheet and White Paper shortly.</p></div>';
+    } catch (err) {
+      btn.disabled = false; btn.textContent = "Let's go!";
+      show("err", "Something went wrong sending the form. Please try again, or email we@stopspreadsheets.com.");
+    }
+  });
+</script>
+</body>
+</html>
